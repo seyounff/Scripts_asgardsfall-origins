@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"10000gem"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : AsgardsFallOrigins.exe
+  Version: 
+  Date   : 2024-09-17
+  Author : skdia
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,F2 0F 10 45 E0 F2 0F 10 4D D8 F3 0F 2A) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov rax, 0x40C3880000000000
+  mov qword ptr [rbp-20], rax
+  movsd xmm0,[rbp-20]
+  jmp return
+
+INJECT:
+  jmp newmem
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db F2 0F 10 45 E0
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 29444B0A12B
+
+29444B0A0FC: F3 0F 5A C0                    - cvtss2sd xmm0,xmm0
+29444B0A100: F2 0F 11 45 E0                 - movsd [rbp-20],xmm0
+29444B0A105: F3 0F 10 45 E8                 - movss xmm0,[rbp-18]
+29444B0A10A: F3 0F 5A C0                    - cvtss2sd xmm0,xmm0
+29444B0A10E: F2 0F 11 45 D8                 - movsd [rbp-28],xmm0
+29444B0A113: B9 02 00 00 00                 - mov ecx,00000002
+29444B0A118: BA 05 00 00 00                 - mov edx,00000005
+29444B0A11D: 90                             - nop 
+29444B0A11E: 49 BB 60 6A F6 59 94 02 00 00  - mov r11,0000029459F66A60
+29444B0A128: 41 FF D3                       - call r11
+// ---------- INJECTING HERE ----------
+29444B0A12B: F2 0F 10 45 E0                 - movsd xmm0,[rbp-20]
+// ---------- DONE INJECTING  ----------
+29444B0A130: F2 0F 10 4D D8                 - movsd xmm1,[rbp-28]
+29444B0A135: F3 0F 2A D0                    - cvtsi2ss xmm2,eax
+29444B0A139: F3 0F 5A D2                    - cvtss2sd xmm2,xmm2
+29444B0A13D: F2 0F 58 CA                    - addsd xmm1,xmm2
+29444B0A141: F2 0F 58 C1                    - addsd xmm0,xmm1
+29444B0A145: F2 0F 5A E8                    - cvtsd2ss xmm5,xmm0
+29444B0A149: F3 0F 11 AE 04 04 00 00        - movss [rsi+00000404],xmm5
+29444B0A151: 48 8B C6                       - mov rax,rsi
+29444B0A154: F3 0F 10 86 04 04 00 00        - movss xmm0,[rsi+00000404]
+29444B0A15C: F3 0F 5A C0                    - cvtss2sd xmm0,xmm0
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"god"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : AsgardsFallOrigins.exe
+  Version: 
+  Date   : 2024-09-17
+  Author : skdia
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,F3 0F 10 4D E8 F3 0F 5A C9 F2 0F 5C C1 F2) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov rax, 0x0000000000000000
+  movq xmm1, rax
+  jmp return
+
+INJECT:
+  jmp newmem
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db F3 0F 10 4D E8
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 130B3EF23B7
+
+130B3EF238A: 48 B8 10 34 D7 83 2F 01 00 00  - mov rax,0000012F83D73410
+130B3EF2394: 48 8B 00                       - mov rax,[rax]
+130B3EF2397: 48 8B C8                       - mov rcx,rax
+130B3EF239A: 83 38 00                       - cmp dword ptr [rax],00
+130B3EF239D: 90                             - nop 
+130B3EF239E: 49 BB BE 26 EF B3 30 01 00 00  - mov r11,00000130B3EF26BE
+130B3EF23A8: 41 FF D3                       - call r11
+INJECT: E9 50 DC 4C 00                 - jmp 130B43C0000
+130B3EF23B0: 0F 1F 00                       - nop dword ptr [rax]
+130B3EF23B3: F3 0F 5A C0                    - cvtss2sd xmm0,xmm0
+// ---------- INJECTING HERE ----------
+130B3EF23B7: F3 0F 10 4D E8                 - movss xmm1,[rbp-18]
+// ---------- DONE INJECTING  ----------
+130B3EF23BC: F3 0F 5A C9                    - cvtss2sd xmm1,xmm1
+130B3EF23C0: F2 0F 5C C1                    - subsd xmm0,xmm1
+130B3EF23C4: F2 0F 5A E8                    - cvtsd2ss xmm5,xmm0
+130B3EF23C8: F3 0F 11 AF 10 04 00 00        - movss [rdi+00000410],xmm5
+130B3EF23D0: 48 B8 50 34 D7 83 2F 01 00 00  - mov rax,0000012F83D73450
+130B3EF23DA: 48 8B 00                       - mov rax,[rax]
+130B3EF23DD: 0F B6 40 7C                    - movzx eax,byte ptr [rax+7C]
+130B3EF23E1: 85 C0                          - test eax,eax
+130B3EF23E3: 0F 84 4D 00 00 00              - je 130B3EF2436
+130B3EF23E9: 48 B8 50 34 D7 83 2F 01 00 00  - mov rax,0000012F83D73450
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"point"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : AsgardsFallOrigins.exe
+  Version: 
+  Date   : 2024-09-17
+  Author : skdia
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,89 88 EC 03 00 00 48 8B 46) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [rax+000003EC],#100
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 89 88 EC 03 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1DFD4841E5C
+
+1DFD4841E2B: 48 8B C8                       - mov rcx,rax
+1DFD4841E2E: 83 38 00                       - cmp dword ptr [rax],00
+1DFD4841E31: 48 8D 64 24 00                 - lea rsp,[rsp+00]
+1DFD4841E36: 49 BB 70 BD 86 D4 DF 01 00 00  - mov r11,000001DFD486BD70
+1DFD4841E40: 41 FF D3                       - call r11
+1DFD4841E43: 48 B8 90 33 4D 95 DE 01 00 00  - mov rax,000001DE954D3390
+1DFD4841E4D: 48 8B 00                       - mov rax,[rax]
+1DFD4841E50: 48 8B D0                       - mov rdx,rax
+1DFD4841E53: 48 63 88 EC 03 00 00           - movsxd  rcx,dword ptr [rax+000003EC]
+1DFD4841E5A: FF C9                          - dec ecx
+// ---------- INJECTING HERE ----------
+1DFD4841E5C: 89 88 EC 03 00 00              - mov [rax+000003EC],ecx
+// ---------- DONE INJECTING  ----------
+1DFD4841E62: 48 8B 46 20                    - mov rax,[rsi+20]
+1DFD4841E66: 48 8B C8                       - mov rcx,rax
+1DFD4841E69: 48 8B D6                       - mov rdx,rsi
+1DFD4841E6C: 83 38 00                       - cmp dword ptr [rax],00
+1DFD4841E6F: 48 8D AD 00 00 00 00           - lea rbp,[rbp+00000000]
+1DFD4841E76: 49 BB 30 BF 86 D4 DF 01 00 00  - mov r11,000001DFD486BF30
+1DFD4841E80: 41 FF D3                       - call r11
+1DFD4841E83: 48 8B CE                       - mov rcx,rsi
+1DFD4841E86: 49 BB 30 25 84 D4 DF 01 00 00  - mov r11,000001DFD4842530
+1DFD4841E90: 41 FF D3                       - call r11
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
